@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Dashboard - Career Compass AI{% endblock %}
+{% block content %}
+<section class="section-head">
+  <h1>Welcome, {{ current_user.username }}</h1>
+  <p>Your career goal: {{ profile.career_goal or "Choose a specialization" }}</p>
+</section>
+<section class="stats-grid">
+  <div class="glass-card stat-card"><span>Roadmap Progress</span><strong>{{ roadmap_percent }}%</strong><div class="progress"><div class="progress-bar" style="width: {{ roadmap_percent }}%"></div></div></div>
+  <div class="glass-card stat-card"><span>Interview Average</span><strong>{{ average_score }}%</strong><div class="progress"><div class="progress-bar bg-info" style="width: {{ average_score }}%"></div></div></div>
+  <div class="glass-card stat-card"><span>Resume Score</span><strong>{{ resume.score if resume else 0 }}</strong><small>{{ resume.category if resume else "Not analyzed" }}</small></div>
+  <div class="glass-card stat-card"><span>Activities</span><strong>{{ activities|length }}</strong><small>Recent actions</small></div>
+</section>
+<section class="grid-2">
+  <div class="glass-card p-4">
+    <h3>Interview Scores</h3>
+    {% for score in scores %}
+      <div class="list-row"><span>{{ score.category }}</span><strong>{{ score.score }}/{{ score.total }}</strong></div>
+    {% else %}<p>No quiz attempts yet.</p>{% endfor %}
+  </div>
+  <div class="glass-card p-4">
+    <h3>Recent Activities</h3>
+    {% for activity in activities %}
+      <div class="list-row"><span>{{ activity.message }}</span><small>{{ activity.created_at }}</small></div>
+    {% else %}<p>No activity yet.</p>{% endfor %}
+  </div>
+</section>
+{% endblock %}

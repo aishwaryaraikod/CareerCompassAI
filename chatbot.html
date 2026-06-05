@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}AI Chatbot - Career Compass AI{% endblock %}
+{% block content %}
+<section class="section-head">
+  <h1>AI Career Assistant</h1>
+  <p>Python rule-based assistant for careers, projects, resumes, certifications, and placements.</p>
+</section>
+<section class="chat-window glass-card">
+  {% if question %}<div class="chat-bubble user">{{ question }}</div>{% endif %}
+  {% if answer %}<div class="chat-bubble bot">{{ answer }}</div>{% else %}<div class="chat-bubble bot">Ask: How do I become a Data Scientist?</div>{% endif %}
+</section>
+<form method="post" class="chat-form">
+  <input class="form-control" name="message" placeholder="Ask your career question..." required>
+  <button class="btn btn-cyan">Ask</button>
+</form>
+{% endblock %}

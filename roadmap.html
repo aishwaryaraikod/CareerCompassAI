@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %}Roadmap - Career Compass AI{% endblock %}
+{% block content %}
+<section class="section-head">
+  <h1>AI Career Roadmap Generator</h1>
+  <p>Select a specialization and save your progress.</p>
+</section>
+<form class="glass-card p-3 mb-4" method="get">
+  <div class="row g-3">
+    <div class="col-md-8"><input class="form-control" name="q" value="{{ query }}" placeholder="Search career specialization"></div>
+    <div class="col-md-4"><button class="btn btn-cyan w-100">Search</button></div>
+  </div>
+</form>
+<div class="career-pills">
+  {% for item in matches %}
+    <a class="career-pill {% if item == roadmap.title %}active{% endif %}" href="{{ url_for('roadmap', specialization=item) }}">{{ item }}</a>
+  {% endfor %}
+</div>
+<section class="glass-card p-4">
+  <h2>{{ roadmap.title }}</h2>
+  <p>{{ roadmap.overview }}</p>
+  <div class="grid-2">
+    <div><h4>Industry Demand</h4><p>{{ roadmap.industry_demand }}</p></div>
+    <div><h4>Future Scope</h4><p>{{ roadmap.future_scope }}</p></div>
+  </div>
+  <h4>Skills Required</h4>
+  <div class="tag-cloud">{% for skill in roadmap.skills %}<span>{{ skill }}</span>{% endfor %}</div>
+  {% for key, label in [("learning_path","Learning Path"),("beginner","Beginner Stage"),("intermediate","Intermediate Stage"),("advanced","Advanced Stage"),("certifications","Certifications"),("courses","Recommended Courses"),("internships","Internship Suggestions"),("job_roles","Job Roles"),("projects","Real-world Projects")] %}
+    <h4 class="mt-4">{{ label }}</h4>
+    <ul class="clean-list">{% for item in roadmap[key] %}<li>{{ item }}</li>{% endfor %}</ul>
+  {% endfor %}
+  <div class="callout"><strong>Salary Range:</strong> {{ roadmap.salary_range }}<br><strong>Job Ready Time:</strong> {{ roadmap.time_required }}</div>
+  <form method="post" class="mt-4">
+    <input type="hidden" name="specialization" value="{{ roadmap.title }}">
+    <label>Completed Steps: <span id="stepValue">0</span>/{{ roadmap.total_steps }}</label>
+    <input class="form-range" id="stepRange" type="range" name="completed_steps" min="0" max="{{ roadmap.total_steps }}" value="0">
+    <button class="btn btn-cyan">Save Progress</button>
+  </form>
+</section>
+{% endblock %}

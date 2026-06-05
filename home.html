@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}Career Compass AI - Home{% endblock %}
+{% block content %}
+<section class="hero">
+  <div class="row align-items-center g-4">
+    <div class="col-lg-7">
+      <span class="eyebrow">Python Expo Project</span>
+      <h1>Career Compass AI</h1>
+      <p class="lead">An intelligent Flask platform for career roadmaps, interview preparation, resume analysis, progress tracking, and AI-style guidance.</p>
+      <div class="d-flex flex-wrap gap-3">
+        <a href="{{ url_for('register') }}" class="btn btn-cyan btn-lg">Start Career Journey</a>
+        <a href="{{ url_for('login') }}" class="btn btn-outline-light btn-lg">Demo Login</a>
+      </div>
+      <p class="demo-text mt-3">Demo: demo@careercompass.ai / demo123</p>
+    </div>
+    <div class="col-lg-5">
+      <div class="hero-panel glass-card">
+        <div class="metric"><strong>25</strong><span>Career Tracks</span></div>
+        <div class="metric"><strong>18</strong><span>Interview Categories</span></div>
+        <div class="metric"><strong>100%</strong><span>Python Backend Logic</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="feature-grid">
+  {% for title, text in [
+    ("Career Roadmaps", "Personalized beginner, intermediate, and advanced learning plans."),
+    ("Interview Portal", "MCQs, technical categories, scoring, reports, and progress history."),
+    ("Resume Analyzer", "PDF parsing, ATS score, skill detection, and improvement suggestions."),
+    ("AI Assistant", "Rule-based Python chatbot for careers, projects, resumes, and placements.")
+  ] %}
+  <article class="glass-card feature-card">
+    <h3>{{ title }}</h3>
+    <p>{{ text }}</p>
+  </article>
+  {% endfor %}
+</section>
+{% endblock %}

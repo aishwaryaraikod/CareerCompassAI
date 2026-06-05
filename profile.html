@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}Profile - Career Compass AI{% endblock %}
+{% block content %}
+<section class="auth-card glass-card">
+  <h2>Profile Management</h2>
+  <form method="post">
+    <label>Full Name</label><input class="form-control" name="full_name" value="{{ profile.full_name }}">
+    <label>College</label><input class="form-control" name="college" value="{{ profile.college }}">
+    <label>Career Goal</label>
+    <select class="form-select" name="career_goal">
+      {% for item in specializations %}<option {% if item == profile.career_goal %}selected{% endif %}>{{ item }}</option>{% endfor %}
+    </select>
+    <label>Bio</label><textarea class="form-control" name="bio" rows="4">{{ profile.bio }}</textarea>
+    <button class="btn btn-cyan w-100 mt-3">Update Profile</button>
+  </form>
+</section>
+{% endblock %}

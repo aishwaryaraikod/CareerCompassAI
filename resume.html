@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Resume Analyzer - Career Compass AI{% endblock %}
+{% block content %}
+<section class="section-head">
+  <h1>Resume Analyzer</h1>
+  <p>Upload a PDF resume for Python-powered skill detection and ATS suggestions.</p>
+</section>
+<form method="post" enctype="multipart/form-data" class="glass-card p-4">
+  <input class="form-control" type="file" name="resume" accept=".pdf" required>
+  <button class="btn btn-cyan mt-3">Analyze Resume</button>
+</form>
+{% if analysis %}
+<section class="glass-card p-4 mt-4">
+  <h3>Latest Analysis</h3>
+  <div class="score-ring">{{ analysis.score }}</div>
+  <p class="lead">{{ analysis.category }}</p>
+  <p><strong>Detected Skills:</strong> {{ analysis.skills or "None detected" }}</p>
+  <p><strong>Missing Skills:</strong> {{ analysis.missing_skills or "None" }}</p>
+  <h4>Recommendations</h4>
+  <pre class="suggestions">{{ analysis.suggestions }}</pre>
+</section>
+{% endif %}
+{% endblock %}

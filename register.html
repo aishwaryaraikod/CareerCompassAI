@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}Register - Career Compass AI{% endblock %}
+{% block content %}
+<section class="auth-card glass-card">
+  <h2>Create Account</h2>
+  <form method="post">
+    <label>Username</label>
+    <input class="form-control" name="username" minlength="3" required>
+    <label>Email</label>
+    <input class="form-control" type="email" name="email" required>
+    <label>Password</label>
+    <input class="form-control" type="password" name="password" minlength="6" required>
+    <button class="btn btn-cyan w-100 mt-3">Register</button>
+  </form>
+</section>
+{% endblock %}
